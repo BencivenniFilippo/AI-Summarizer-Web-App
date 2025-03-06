@@ -1,0 +1,18 @@
+<h3>Printare Liste</h3>
+{% for item in lista %}
+    {{ item }}<br/>
+{% endfor %}
+
+<br/>
+
+<h3>Printare elementi singoli</h3>
+{{ lista.2 }}
+
+<br/>
+
+<h3>Usare if else</h3>
+{% for item in lista %}
+    {% if item == 'giovanni' %}
+        {{ item }}
+    {% endif %}
+{% endfor %}
