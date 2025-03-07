@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, flash
 from app.forms import SummarizeForm
+from app.nlp import summarize
 
 main_blueprint = Blueprint('main', __name__) # create a blueprint named 'main'
 
@@ -13,8 +14,10 @@ def home():
     if form.validate_on_submit():
         text = form.text_input.data
 
-        # TODO
-        summary = text
-        # TODO
+        #if len(text.split()) < 10:
+        #    flash('Insert at least 10 words')
+        #    summary = text
+
+        summary = summarize(text) # summarization through BART
 
     return render_template("home.html", form=form, summary=summary)
