@@ -1,13 +1,16 @@
 from flask import Flask, render_template
 from app.routes import main_blueprint
-
+import dotenv
+dotenv.load_dotenv()
+import os
 
 def create_app():
     app = Flask(__name__)
 
+    app.config['SECRET_KEY'] = os.environ["MY_KEY"]
+
     app.register_blueprint(main_blueprint)
 
-    
     
     
     # HANDLING ERRORS
