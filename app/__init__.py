@@ -24,3 +24,5 @@ def create_app():
         return render_template('error_URL.html'), 500
 
     return app
+
+app = create_app()
