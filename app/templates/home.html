@@ -1,17 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% for message in get_flashed_messages() %}
-
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{ message }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-{% endfor %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,6 +74,32 @@
         .summary-box p {
         color: #000000;
         }
+        .alert-danger {
+            width: 80%;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .alert-danger p {
+            margin: 0;
+        }
+        .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        color: white;
+        border: none;
+        background: none;  /* Ensure there is no background */
+        cursor: pointer;   /* Make sure it looks like a button */
+        }
+
+        /* Remove hover effect */
+        .close:hover {
+            background: none;   /* No background on hover */
+            color: rgb(0, 0, 0);        /* Keep the color consistent */
+        }
 
     </style>
 </head>
@@ -94,6 +109,18 @@
         {{ form.hidden_tag() }}
         {{ form.text_input(rows=10, cols=80) }}
         <button type="submit">Summarize</button>
+
+        {% if form.text_input.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            {% for error in form.text_input.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+
     </form>
     
     {% if summary %}

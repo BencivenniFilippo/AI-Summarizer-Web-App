@@ -12,7 +12,6 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     
-    
     # HANDLING ERRORS
     # Invalid URL
     @app.errorhandler(404)
